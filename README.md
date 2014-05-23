@@ -1,5 +1,7 @@
 # Wisper::ActiveRecord [WIP]
 
+[![Build Status](https://travis-ci.org/krisleech/wisper-activerecord.png?branch=master)](https://travis-ci.org/krisleech/wisper-activerecord)
+
 Transparently publish all model changes to subscribers.
 
 ## Installation
