@@ -96,3 +96,9 @@ Supports:
 ## Contributing
 
 Please submit a Pull Request with specs.
+
+### Running the specs
+
+```
+bundle exec rspec
+```
