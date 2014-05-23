@@ -1,6 +1,7 @@
 describe 'ActiveRecord' do
+  let(:listener) { double('Listener') }
+
   describe 'create' do
-    let(:listener) { double('Listener') }
 
     it 'publishes an on_create event to listener' do
       expect(listener).to receive(:on_create)
@@ -18,4 +19,18 @@ describe 'ActiveRecord' do
 
   end
 
+  describe 'update' do
+    before do
+      Meeting.create!
+    end
+
+    it 'publishes an on_update event to listener' do
+      expect(listener).to receive(:on_update)
+      Wisper::Activerecord.subscribe(Meeting, to: listener)
+
+      meeting = Meeting.first
+      meeting.update_attributes(title: 'new title')
+
+    end
+  end
 end
