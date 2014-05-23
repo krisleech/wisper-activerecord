@@ -7,7 +7,20 @@ module Wisper
 
       def inject
         klass.class_eval do
+          include Wisper::Publisher
 
+          after_create :publish_creation
+          after_update :publish_update
+
+          private
+
+          def publish_creation
+            broadcast(:on_create, self)
+          end
+
+          def publish_update
+            broadcast(:on_update, self)
+          end
         end
       end
 

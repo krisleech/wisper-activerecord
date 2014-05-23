@@ -1,6 +1,8 @@
 describe 'ActiveRecord' do
   let(:listener) { double('Listener') }
 
+  before { Wisper::GlobalListeners.clear }
+
   describe 'create' do
 
     it 'publishes an on_create event to listener' do

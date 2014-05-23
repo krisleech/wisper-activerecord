@@ -7,6 +7,7 @@ module Wisper
       listener = options.fetch(:to)
 
       Injector.inject(klass)
+      Wisper.add_listener(listener, scope: klass)
     end
 
   end
