@@ -12,12 +12,6 @@ gem 'wisper-activerecord'
 
 ## Usage
 
-**Add the plugin to every `ActiveRecord` model (optional)**
-
-```ruby
-Wisper::ActiveRecord.include
-```
-
 **Our model**
 
 ```ruby
@@ -28,7 +22,7 @@ end
 **Lets subscribe a listener**
 
 ```ruby
-Wisper::ActiveRecord.subscribe(Auditor.new)
+Wisper::ActiveRecord.subscribe(Meeting, to: Auditor.new)
 ```
 
 **Which simply logs all events in memory**
