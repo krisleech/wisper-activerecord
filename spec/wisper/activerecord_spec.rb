@@ -37,7 +37,7 @@ describe 'ActiveRecord' do
   describe 'destroy' do
     before { Meeting.create! }
 
-    it 'publishes an on_update event to listener' do
+    it 'publishes an on_destroy event to listener' do
       expect(listener).to receive(:on_destroy)
       Wisper::Activerecord.subscribe(Meeting, to: listener)
 
