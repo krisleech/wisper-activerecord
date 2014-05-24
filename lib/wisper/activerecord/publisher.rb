@@ -8,6 +8,7 @@ module Wisper
 
         after_create :publish_creation
         after_update :publish_update
+        after_destroy :publish_destroy
 
       end
 
@@ -19,6 +20,10 @@ module Wisper
 
       def publish_update
         broadcast(:on_update, self)
+      end
+
+      def publish_destroy
+        broadcast(:on_destroy, self)
       end
     end
   end
