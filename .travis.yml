@@ -1,6 +1,6 @@
 language: ruby
 bundler_args: --without=metrics
-script: rspec spec
+script: bundle exec rspec spec
 gemfile:
   - gemfiles/activerecord-3.0
   - gemfiles/activerecord-4.0

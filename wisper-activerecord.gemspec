@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'wisper/activerecord/version'
+require 'wisper/active_record/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "wisper-activerecord"
-  spec.version       = Wisper::Activerecord::VERSION
+  spec.version       = Wisper::ActiveRecord::VERSION
   spec.authors       = ["Kris Leech"]
   spec.email         = ["kris.leech@gmail.com"]
   spec.summary       = %q{Subscribe to changes on ActiveRecord models}
@@ -21,8 +21,4 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "wisper", "~> 1.3"
   spec.add_dependency "activerecord", ">= 3.0.0"
-
-  spec.add_development_dependency "bundler", "~> 1.5"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency 'rspec', "~> 3.0.0.rc1"
 end
