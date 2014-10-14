@@ -9,8 +9,6 @@ end
 require 'wisper'
 require 'active_record'
 
-require 'pry'
-
 puts "Using ActiveRecord #{ActiveRecord::VERSION::STRING}"
 
 adapter = RUBY_PLATFORM == "java" ? 'jdbcsqlite3' : 'sqlite3'
