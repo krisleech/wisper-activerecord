@@ -180,7 +180,7 @@ end
 **Do some CRUD**
 
 ```ruby
-Meeting.create(:description => ‘Team Retrospective’, :starts_at => Time.now + 2.days)
+Meeting.create(:description => 'Team Retrospective', :starts_at => Time.now + 2.days)
 
 meeting = Meeting.find(1)
 meeting.starts_at = Time.now + 2.months
