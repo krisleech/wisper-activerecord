@@ -57,7 +57,7 @@ describe 'ActiveRecord' do
     it 'publishes an after_create event to listener' do
       expect(listener).to receive(:after_create).with(instance_of(model_class))
       model_class.subscribe(listener)
-      model_class.create!
+      model_class.create
     end
   end
 
@@ -69,7 +69,7 @@ describe 'ActiveRecord' do
     it 'publishes an after_update event to listener' do
       expect(listener).to receive(:after_update).with(instance_of(model_class))
       model.subscribe(listener)
-      model.update_attributes!(title: 'new title')
+      model.update_attributes(title: 'new title')
     end
   end
 
@@ -81,7 +81,7 @@ describe 'ActiveRecord' do
     it 'publishes an on_destroy event to listener' do
       expect(listener).to receive(:after_destroy).with(instance_of(model_class))
       model_class.subscribe(listener)
-      model.destroy!
+      model.destroy
     end
   end
 end
