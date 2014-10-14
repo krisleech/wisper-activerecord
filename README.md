@@ -16,7 +16,7 @@ gem 'wisper-activerecord'
 
 ## Usage
 
-### The Model
+### Setup a publisher
 
 ```ruby
 class Meeting < ActiveRecord::Base
@@ -26,24 +26,29 @@ class Meeting < ActiveRecord::Base
 end
 ```
 
-If you wish all models to broadcast events without having explicitly include
-`Wisper.model` in each you can add the following to an initializer:
+If you wish all models to broadcast events without having to explicitly include
+`Wisper.model` add the following to an initializer:
 
 ```ruby
-# config/initializers/wisper.rb
 Wisper::ActiveRecord.extend_all
 ```
 
-#### Subscribing Listeners
+### Subscribing
 
-Subscribe a listener to instances of models:
+Subscribe a listener to model instances:
 
 ```ruby
 meeting = Meeting.new
 meeting.subscribe(Auditor.new)
 ```
 
-Subscribe a listener to all instances of a model:
+Subscribe a block to model instances:
+
+```ruby
+meeting.on(:create_meeting_successful) { |meeting| ... }
+```
+
+Subscribe a listener to _all_ instances of a model:
 
 ```ruby
 Meeting.subscribe(Auditor.new)
@@ -51,18 +56,12 @@ Meeting.subscribe(Auditor.new)
 
 Please refer to the [Wisper README](https://github.com/krisleech/wisper) for full details about subscribing.
 
-The events broadcast are:
+The events which are automatically broadcast are:
 
 * `before_{create, update, destroy}`
 * `after_{create, update, destroy}`
 
-### Subscribing blocks
-
-```ruby
-meeting.on(:create_meeting_successful) { |meeting| ... }
-```
-
-### Reacting to events
+### Reacting to Events
 
 To receive an event the listener must implement a method matching the name of
 the event with a single argument, the instance of the model.
@@ -73,9 +72,9 @@ def create_meeting_successful(meeting)
 end
 ```
 
-### Success and Failure events for Create and Update
+### Success and Failure Events for Create and Update
 
-To have event broadcast for success and failure of create and
+To have events broadcast for success and failure of create and
 update you must use the `commit` method.
 
 ```ruby
@@ -99,7 +98,9 @@ In addition the the regular events broadcast the following events are also broad
 
 * `{create, update}_<model_name>_{successful, failed}`
 
-### Example controller
+## Example
+
+### Controller
 
 ```ruby
 class MeetingsController < ApplicationController
@@ -129,9 +130,9 @@ class MeetingsController < ApplicationController
 end
 ```
 
-#### An example Listener
+### Listener
 
-**Which simply logs all events in memory**
+**Which simply records an audit in memory**
 
 ```ruby
 class Auditor
