@@ -1,19 +1,11 @@
 language: ruby
 bundler_args: --without=metrics
-script: rspec spec
+script: bundle exec rspec spec
 gemfile:
   - gemfiles/activerecord-3.0
   - gemfiles/activerecord-4.0
 rvm:
   - '1.9.3'
-  - '2.0.0'
   - '2.1.1'
   - jruby
   - rbx-2
-  ### ALLOWED FAILURES ###
-  # see how compatible we are with dev versions, but do not fail the build
-  - ruby-head
-  - jruby-head
-allow_failures:
-  - rvm: ruby-head
-  - rvm: jruby-head

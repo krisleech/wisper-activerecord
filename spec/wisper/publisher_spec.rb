@@ -1,8 +1,8 @@
-describe Wisper::Activerecord::Publisher do
+describe Wisper::ActiveRecord::Publisher do
 
   it 'includes Wisper::Publisher' do
     klass = Class.new(ActiveRecord::Base) do
-      include Wisper::Activerecord::Publisher
+      include Wisper::ActiveRecord::Publisher
     end
 
     expect(klass.ancestors).to include Wisper::Publisher
