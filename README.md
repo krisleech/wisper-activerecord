@@ -137,7 +137,7 @@ end
 class Auditor
   include Singleton
 
-  attr_accessor :audt
+  attr_accessor :audit
 
   def initialize
     @audit = []
