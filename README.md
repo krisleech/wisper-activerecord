@@ -1,8 +1,12 @@
-# Wisper::ActiveRecord [WIP]
+# Wisper::ActiveRecord
 
 [![Build Status](https://travis-ci.org/krisleech/wisper-activerecord.png?branch=master)](https://travis-ci.org/krisleech/wisper-activerecord)
 
-Transparently publish model lifecycle to subscribers.
+Transparently publish model lifecycle events to subscribers.
+
+Using Wisper events is a better alternative to ActiveRecord callbacks and Observers.
+
+Listeners are subscribed to models at runtime.
 
 ## Installation
 
@@ -32,31 +36,25 @@ Wisper::ActiveRecord.extend_all
 
 #### Subscribing Listeners
 
-We can now subscribe a listener to instances of models:
+Subscribe a listener to instances of models:
 
 ```ruby
 meeting = Meeting.new
 meeting.subscribe(Auditor.new)
 ```
 
-Or if we prefer we can subscribe a listener to all instance of a model:
+Subscribe a listener to all instances of a model:
 
 ```ruby
 Meeting.subscribe(Auditor.new)
 ```
 
-Please refer to the Wisper gem for full details about subscribing.
+Please refer to the [Wisper README](https://github.com/krisleech/wisper) for full details about subscribing.
 
 The events broadcast are:
 
-* before_{create, update, destroy}
-* create_<model_name>_successful
-* create_<model_name>_failed
-* update_<model_name>_successful
-* update_<model_name>_failed
-* destroy<model_name>_successful
-* destroy<model_name>_failed
-* after{create, update, destroy}
+* `before_{create, update, destroy}`
+* `after_{create, update, destroy}`
 
 ### Subscribing blocks
 
@@ -64,10 +62,72 @@ The events broadcast are:
 meeting.on(:create_meeting_successful) { |meeting| ... }
 ```
 
-### The Listener
+### Reacting to events
 
 To receive an event the listener must implement a method matching the name of
 the event with a single argument, the instance of the model.
+
+```ruby
+def create_meeting_successful(meeting)
+  # ...
+end
+```
+
+### Success and Failure events for Create and Update
+
+To have event broadcast for success and failure of create and
+update you must use the `commit` method.
+
+```ruby
+meeting.title = 'My Meeting'
+meeting.commit
+```
+
+You can also pass attributes directly to `commit`:
+
+```ruby
+meeting.commit(title: 'My Meeting')
+```
+
+And use the class method for creating new records:
+
+```ruby
+Meeting.commit(title: 'My Meeting')
+```
+
+In addition the the regular events broadcast the following events are also broadcast:
+
+* `{create, update}_<model_name>_{successful, failed}`
+
+### Example controller
+
+```ruby
+class MeetingsController < ApplicationController
+  def new
+    @meeting = Meeting.new
+  end
+
+  def create
+    @meeting = Meeting.new(params[:meeting])
+    @meeting.subscribe(Auditor.new)
+    @meeting.on(:meeting_create_successful) { redirect_to meeting_path }
+    @meeting.on(:meeting_create_failed)     { render action: :new }
+    @meeting.commit
+  end
+
+  def edit
+    @meeting = Meeting.find(params[:id])
+  end
+
+  def update
+    @meeting = Meeting.find(params[:id])
+    @meeting.subscribe(Auditor.new)
+    @meeting.on(:meeting_update_successful) { redirect_to meeting_path }
+    @meeting.on(:meeting_update_failed)     { render :action => :edit }
+    @meeting.commit(params[:meeting])
+  end
+end
+```
 
 #### An example Listener
 
