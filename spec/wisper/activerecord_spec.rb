@@ -9,10 +9,8 @@ describe 'ActiveRecord' do
     expect(Wisper.model).to eq Wisper::ActiveRecord::Publisher
   end
 
-  describe '.commit' do
-
+  describe '.commit' do # DEPRECATED
     describe 'when creating' do
-
       context 'and model is valid' do
         it 'publishes create_<model_name>_successful event to listener' do
           expect(listener).to receive(:create_meeting_successful).with(instance_of(model_class))
