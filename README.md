@@ -58,8 +58,13 @@ Please refer to the [Wisper README](https://github.com/krisleech/wisper) for ful
 
 The events which are automatically broadcast are:
 
-* `before_{create, update, destroy}`
-* `after_{create, update, destroy}`
+* `after_create`
+* `after_create`
+* `after_destroy`
+* `create_<model_name>_{successful, failed}`
+* `update_<model_name>_{successful, failed}`
+* `destroy_<model_name>_successful`
+* `after_rollback`
 
 ### Reacting to Events
 
@@ -71,32 +76,6 @@ def create_meeting_successful(meeting)
   # ...
 end
 ```
-
-### Success and Failure Events for Create and Update
-
-To have events broadcast for success and failure of create and
-update you must use the `commit` method.
-
-```ruby
-meeting.title = 'My Meeting'
-meeting.commit
-```
-
-You can also pass attributes directly to `commit`:
-
-```ruby
-meeting.commit(title: 'My Meeting')
-```
-
-And use the class method for creating new records:
-
-```ruby
-Meeting.commit(title: 'My Meeting')
-```
-
-In addition the the regular events broadcast the following events are also broadcast:
-
-* `{create, update}_<model_name>_{successful, failed}`
 
 ## Example
 
@@ -113,7 +92,7 @@ class MeetingsController < ApplicationController
     @meeting.subscribe(Auditor.instance)
     @meeting.on(:meeting_create_successful) { redirect_to meeting_path }
     @meeting.on(:meeting_create_failed)     { render action: :new }
-    @meeting.commit
+    @meeting.save
   end
 
   def edit
@@ -125,7 +104,7 @@ class MeetingsController < ApplicationController
     @meeting.subscribe(Auditor.instance)
     @meeting.on(:meeting_update_successful) { redirect_to meeting_path }
     @meeting.on(:meeting_update_failed)     { render :action => :edit }
-    @meeting.commit(params[:meeting])
+    @meeting.update_attributes(params[:meeting])
   end
 end
 ```
