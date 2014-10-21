@@ -6,42 +6,50 @@ module Wisper
 
         include Wisper::Publisher
 
-        after_commit :publish_creation, on: :create
-        after_commit :publish_update,   on: :update
-        after_commit :publish_destroy,  on: :destroy
+        after_validation :after_validation_broadcast
+        after_commit     :after_create_broadcast,  on: :create
+        after_commit     :after_update_broadcast,  on: :update
+        after_commit     :after_destroy_broadcast, on: :destroy
+        after_rollback   :after_rollback_broadcast
       end
 
       def commit(_attributes = nil)
-        _action = new_record? ? 'create' : 'update'
+        warn "[DEPRECATED] use save, create, update_attributes as usual"
         assign_attributes(_attributes) if _attributes.present?
-        result = save
-        if result
-          broadcast("#{_action}_#{self.class.model_name.param_key}_successful", self)
-        else
-          broadcast("#{_action}_#{self.class.model_name.param_key}_failed", self)
-        end
-        result
+        save
       end
 
       module ClassMethods
         def commit(_attributes = nil)
-          new(_attributes).commit
+          warn "[DEPRECATED] use save, create, update_attributes as usual"
+          new(_attributes).save
         end
       end
 
       private
 
-      def publish_creation
+      def after_validation_broadcast
+        action = new_record? ? 'create' : 'update'
+        broadcast("#{action}_#{self.class.model_name.param_key}_failed", self) unless errors.empty?
+      end
+
+      def after_create_broadcast
         broadcast(:after_create, self)
+        broadcast("create_#{self.class.model_name.param_key}_successful", self)
       end
 
-      def publish_update
+      def after_update_broadcast
         broadcast(:after_update, self)
+        broadcast("update_#{self.class.model_name.param_key}_successful", self)
       end
 
-      def publish_destroy
+      def after_destroy_broadcast
         broadcast(:after_destroy, self)
         broadcast("destroy_#{self.class.model_name.param_key}_successful", self)
+      end
+
+      def after_rollback_broadcast
+        broadcast(:after_rollback, self)
       end
     end
   end
