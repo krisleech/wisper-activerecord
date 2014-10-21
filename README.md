@@ -109,6 +109,9 @@ class MeetingsController < ApplicationController
 end
 ```
 
+Using `on` to subscribe a block to handle the response is optional,
+you can still use `if @meeting.save` if you prefer.
+
 ### Listener
 
 **Which simply records an audit in memory**
