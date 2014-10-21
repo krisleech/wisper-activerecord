@@ -1,5 +1,7 @@
 # Wisper::ActiveRecord
 
+[![Gem Version](https://badge.fury.io/rb/wisper-activerecord.png)](http://badge.fury.io/rb/wisper-activerecord)
+[![Code Climate](https://codeclimate.com/github/krisleech/wisper-activerecord.png)](https://codeclimate.com/github/krisleech/wisper-activerecord)
 [![Build Status](https://travis-ci.org/krisleech/wisper-activerecord.png?branch=master)](https://travis-ci.org/krisleech/wisper-activerecord)
 
 Transparently publish model lifecycle events to subscribers.
