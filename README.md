@@ -155,7 +155,7 @@ class Auditor
       action: action,
       subject_id: subject.id,
       subject_class: subject.class.to_s,
-      changes: subject.changes,
+      changes: subject.previous_changes,
       created_at: Time.now
     }
   end
