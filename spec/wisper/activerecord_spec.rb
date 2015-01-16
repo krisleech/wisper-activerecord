@@ -82,4 +82,15 @@ describe 'ActiveRecord' do
       model.destroy
     end
   end
+
+  describe 'rollback' do
+    it 'publishes an after_rollback event to listener' do
+      expect(listener).to receive(:after_rollback).with(instance_of(model_class))
+      model_class.subscribe(listener)
+      model_class.transaction do
+        model_class.create!
+        raise ActiveRecord::Rollback
+      end
+    end
+  end
 end
