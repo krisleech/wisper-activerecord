@@ -61,7 +61,6 @@ Please refer to the [Wisper README](https://github.com/krisleech/wisper) for ful
 The events which are automatically broadcast are:
 
 * `after_create`
-* `after_create`
 * `after_destroy`
 * `create_<model_name>_{successful, failed}`
 * `update_<model_name>_{successful, failed}`
