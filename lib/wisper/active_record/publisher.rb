@@ -10,6 +10,7 @@ module Wisper
         after_commit     :after_create_broadcast,  on: :create
         after_commit     :after_update_broadcast,  on: :update
         after_commit     :after_destroy_broadcast, on: :destroy
+        after_commit     :after_commit_broadcast
         after_rollback   :after_rollback_broadcast
       end
 
@@ -46,6 +47,10 @@ module Wisper
       def after_destroy_broadcast
         broadcast(:after_destroy, self)
         broadcast("destroy_#{self.class.model_name.param_key}_successful", self)
+      end
+
+      def after_commit_broadcast
+        broadcast(:after_commit, self)
       end
 
       def after_rollback_broadcast
