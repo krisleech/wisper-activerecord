@@ -76,7 +76,7 @@ describe 'ActiveRecord' do
 
     let(:model) { model_class.first }
 
-    it 'publishes an on_destroy event to listener' do
+    it 'publishes an after_destroy event to listener' do
       expect(listener).to receive(:after_destroy).with(instance_of(model_class))
       model_class.subscribe(listener)
       model.destroy
