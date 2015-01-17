@@ -84,10 +84,17 @@ describe 'ActiveRecord' do
   end
 
   describe 'commit' do
-    it 'publishes an after_commit event to listener' do
-      expect(listener).to receive(:after_commit).with(instance_of(model_class))
+    after do
       model_class.subscribe(listener)
       model_class.create
+    end
+
+    it 'publishes an after_commit event to listener' do
+      expect(listener).to receive(:after_commit).with(instance_of(model_class))
+    end
+
+    it 'publishes a <model_name>_committed event to listener' do
+      expect(listener).to receive(:meeting_committed).with(instance_of(model_class))
     end
   end
 
