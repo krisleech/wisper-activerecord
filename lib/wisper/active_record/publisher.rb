@@ -31,31 +31,35 @@ module Wisper
 
       def after_validation_broadcast
         action = new_record? ? 'create' : 'update'
-        broadcast("#{action}_#{self.class.model_name.param_key}_failed", self) unless errors.empty?
+        broadcast("#{action}_#{broadcast_model_name_key}_failed", self) unless errors.empty?
       end
 
       def after_create_broadcast
         broadcast(:after_create, self)
-        broadcast("create_#{self.class.model_name.param_key}_successful", self)
+        broadcast("create_#{broadcast_model_name_key}_successful", self)
       end
 
       def after_update_broadcast
         broadcast(:after_update, self)
-        broadcast("update_#{self.class.model_name.param_key}_successful", self)
+        broadcast("update_#{broadcast_model_name_key}_successful", self)
       end
 
       def after_destroy_broadcast
         broadcast(:after_destroy, self)
-        broadcast("destroy_#{self.class.model_name.param_key}_successful", self)
+        broadcast("destroy_#{broadcast_model_name_key}_successful", self)
       end
 
       def after_commit_broadcast
         broadcast(:after_commit, self)
-        broadcast("#{self.class.model_name.param_key}_committed", self)
+        broadcast("#{broadcast_model_name_key}_committed", self)
       end
 
       def after_rollback_broadcast
         broadcast(:after_rollback, self)
+      end
+
+      def broadcast_model_name_key
+        self.class.model_name.param_key
       end
     end
   end
