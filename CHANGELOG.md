@@ -1,8 +1,7 @@
-## Unreleased
+## 0.3.0 (5 Feb 2015)
 
 * Fixed README (Thomas Brus / thomasbrus)
-* Added `:after_commit` / `:<model_name>_committed` events (Ryan Platte
-  / replaid) 
+* Added `:after_commit` / `:<model_name>_committed` events (Ryan Platte / replaid)
 
 ## 0.2.0 (21 Oct 2014)
 
