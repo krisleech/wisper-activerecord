@@ -65,6 +65,8 @@ The events which are automatically broadcast are:
 * `create_<model_name>_{successful, failed}`
 * `update_<model_name>_{successful, failed}`
 * `destroy_<model_name>_successful`
+* `<model_name>_committed`
+* `after_commit`
 * `after_rollback`
 
 ### Reacting to Events

@@ -83,6 +83,21 @@ describe 'ActiveRecord' do
     end
   end
 
+  describe 'commit' do
+    after do
+      model_class.subscribe(listener)
+      model_class.create
+    end
+
+    it 'publishes an after_commit event to listener' do
+      expect(listener).to receive(:after_commit).with(instance_of(model_class))
+    end
+
+    it 'publishes a <model_name>_committed event to listener' do
+      expect(listener).to receive(:meeting_committed).with(instance_of(model_class))
+    end
+  end
+
   describe 'rollback' do
     it 'publishes an after_rollback event to listener' do
       expect(listener).to receive(:after_rollback).with(instance_of(model_class))
