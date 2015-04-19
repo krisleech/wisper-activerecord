@@ -54,11 +54,6 @@ module Wisper
         broadcast("#{broadcast_model_name_key}_committed", self)
       end
 
-      def after_commit_broadcast
-        broadcast(:after_commit, self)
-        broadcast("#{broadcast_model_name_key}_committed", self)
-      end
-
       def after_rollback_broadcast
         broadcast(:after_rollback, self)
       end
