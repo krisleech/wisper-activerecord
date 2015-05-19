@@ -93,8 +93,8 @@ class MeetingsController < ApplicationController
   def create
     @meeting = Meeting.new(params[:meeting])
     @meeting.subscribe(Auditor.instance)
-    @meeting.on(:meeting_create_successful) { redirect_to meeting_path }
-    @meeting.on(:meeting_create_failed)     { render action: :new }
+    @meeting.on(:create_meeting_successful) { redirect_to meeting_path }
+    @meeting.on(:create_meeting_failed)     { render action: :new }
     @meeting.save
   end
 
@@ -105,8 +105,8 @@ class MeetingsController < ApplicationController
   def update
     @meeting = Meeting.find(params[:id])
     @meeting.subscribe(Auditor.instance)
-    @meeting.on(:meeting_update_successful) { redirect_to meeting_path }
-    @meeting.on(:meeting_update_failed)     { render :action => :edit }
+    @meeting.on(:update_meeting_successful) { redirect_to meeting_path }
+    @meeting.on(:update_meeting_failed)     { render :action => :edit }
     @meeting.update_attributes(params[:meeting])
   end
 end
