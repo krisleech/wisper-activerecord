@@ -179,6 +179,13 @@ meeting.save
 Auditor.audit # => [...]
 ```
 
+## Notes on Testing 
+
+### ActiveRecord <= 4.0
+
+This gem makes use of ActiveRecord's `after_commit` lifecycle hook to broadcast events, which will create issues when testing with transactional fixtures.  Unless you also include the [test_after_commit gem](https://github.com/grosser/test_after_commit) ActiveRecord models will not broadcast any lifecycle events within your tests.
+
+
 ## Compatibility
 
 Tested on 1.9.3, 2.x, Rubinius and JRuby for ActiveRecord ~> 3.0 and ~> 4.0
