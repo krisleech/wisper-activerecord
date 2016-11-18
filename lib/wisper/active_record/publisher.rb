@@ -1,3 +1,5 @@
+require 'wisper'
+
 module Wisper
   module ActiveRecord
     module Publisher
