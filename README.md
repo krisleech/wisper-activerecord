@@ -188,7 +188,7 @@ This gem makes use of ActiveRecord's `after_commit` lifecycle hook to broadcast 
 
 ## Compatibility
 
-Tested on 1.9.3, 2.x, Rubinius and JRuby for ActiveRecord ~> 3.0 and ~> 4.0
+Tested on 1.9.3, 2.x, Rubinius and JRuby for ActiveRecord ~> 3.0, ~> 4.0, and ~> 5.0.
 
 See the CI [build status](https://travis-ci.org/krisleech/wisper-activerecord) for more information.
 
