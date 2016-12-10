@@ -1,11 +1,13 @@
 language: ruby
 bundler_args: --without=metrics
 script: bundle exec rspec spec
+sudo: false
 gemfile:
   - gemfiles/activerecord-3.0
   - gemfiles/activerecord-4.0
 rvm:
   - '1.9.3'
   - '2.1.1'
+  - '2.3'
   - jruby
   - rbx-2
