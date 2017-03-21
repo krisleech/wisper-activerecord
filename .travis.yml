@@ -19,5 +19,7 @@ matrix:
       gemfile: gemfiles/activerecord-5.0
     - rvm: rbx-2
       gemfile: gemfiles/activerecord-5.0
+    - rvm: 2.4.0
+      gemfile: gemfiles/activerecord-3.0
   allow_failures:
     - rvm: rbx-2
