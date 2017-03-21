@@ -19,6 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 1.9.3"
 
-  spec.add_dependency "wisper", "~> 1.3"
+  spec.add_dependency "wisper", "~> 2.0"
   spec.add_dependency "activerecord", ">= 3.0.0"
 end

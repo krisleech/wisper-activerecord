@@ -1,3 +1,8 @@
+## unreleased
+
+* Update to Wisper 2.0 (non-breaking, but we will released a major anyway)
+* fixed README example
+
 ## 0.3.0 (5 Feb 2015)
 
 * Fixed README (Thomas Brus / thomasbrus)
