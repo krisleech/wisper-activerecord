@@ -92,7 +92,7 @@ class MeetingsController < ApplicationController
 
   def create
     @meeting = Meeting.new(params[:meeting])
-    @meeting.subscribe(Auditor.instance)
+    @meeting.subscribe(Auditor.new)
     @meeting.on(:create_meeting_successful) { redirect_to meeting_path }
     @meeting.on(:create_meeting_failed)     { render action: :new }
     @meeting.save
@@ -104,7 +104,7 @@ class MeetingsController < ApplicationController
 
   def update
     @meeting = Meeting.find(params[:id])
-    @meeting.subscribe(Auditor.instance)
+    @meeting.subscribe(Auditor.new)
     @meeting.on(:update_meeting_successful) { redirect_to meeting_path }
     @meeting.on(:update_meeting_failed)     { render :action => :edit }
     @meeting.update_attributes(params[:meeting])
@@ -121,13 +121,6 @@ you can still use `if @meeting.save` if you prefer.
 
 ```ruby
 class Auditor
-  include Singleton
-
-  attr_accessor :audit
-
-  def initialize
-    @audit = []
-  end
 
   def after_create(subject)
     push_audit_for('create', subject)
@@ -142,13 +135,13 @@ class Auditor
   end
 
   def self.audit
-    instance.audit
+    @audit ||= []
   end
 
   private
 
   def push_audit_for(action, subject)
-    audit.push(audit_for(action, subject))
+    self.class.audit.push(audit_for(action, subject))
   end
 
   def audit_for(action, subject)
