@@ -1,7 +1,10 @@
 ## unreleased
 
+Authors: Kris Leech, robwilliams
+
 * Update to Wisper 2.0 (non-breaking, but we will released a major anyway)
 * fixed README example
+* document fixes 
 
 ## 0.3.0 (5 Feb 2015)
 

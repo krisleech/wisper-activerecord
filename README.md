@@ -177,12 +177,14 @@ Auditor.audit # => [...]
 
 ### ActiveRecord <= 4.0
 
-This gem makes use of ActiveRecord's `after_commit` lifecycle hook to broadcast events, which will create issues when testing with transactional fixtures.  Unless you also include the [test_after_commit gem](https://github.com/grosser/test_after_commit) ActiveRecord models will not broadcast any lifecycle events within your tests.
-
+This gem makes use of ActiveRecord's `after_commit` lifecycle hook to broadcast
+events, which will create issues when testing with transactional fixtures.
+Unless you also include the [test_after_commit gem](https://github.com/grosser/test_after_commit)
+ActiveRecord models will not broadcast any lifecycle events within your tests.
 
 ## Compatibility
 
-Tested on 1.9.3, 2.x, Rubinius and JRuby for ActiveRecord ~> 3.0, ~> 4.0, and ~> 5.0.
+Tested on CRuby, Rubinius and JRuby for ActiveRecord ~> 3.0, ~> 4.0, and ~> 5.0.
 
 See the CI [build status](https://travis-ci.org/krisleech/wisper-activerecord) for more information.
 
