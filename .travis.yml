@@ -1,11 +1,27 @@
 language: ruby
 bundler_args: --without=metrics
 script: bundle exec rspec spec
+sudo: false
 gemfile:
   - gemfiles/activerecord-3.0
   - gemfiles/activerecord-4.0
+  - gemfiles/activerecord-5.0
 rvm:
-  - '1.9.3'
-  - '2.1.1'
+  - 1.9.3
+  - 2.1.1
+  - 2.2.6
+  - 2.3.3
   - jruby
   - rbx-2
+matrix:
+  exclude:
+    - rvm: 1.9.3
+      gemfile: gemfiles/activerecord-5.0
+    - rvm: 2.1.1
+      gemfile: gemfiles/activerecord-5.0
+    - rvm: jruby
+      gemfile: gemfiles/activerecord-5.0
+    - rvm: rbx-2
+      gemfile: gemfiles/activerecord-5.0
+  allow_failures:
+    - rvm: rbx-2

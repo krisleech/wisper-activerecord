@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+gem 'rubysl', '~> 2.0', :platforms => :rbx
+
+gem 'rspec'
+
+gem "sqlite3",                          :platform => :ruby
+gem "activerecord-jdbcsqlite3-adapter", :platform => :jruby
+
+gem 'activerecord', '~> 5.0'
+
+gemspec :path => '../'
