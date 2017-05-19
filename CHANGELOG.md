@@ -1,5 +1,7 @@
 ## unreleased
 
+## 1.0.0 (19/May/2017)
+
 Authors: Kris Leech, robwilliams
 
 * Remove deprecated #commit method (breaking change)
