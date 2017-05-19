@@ -2,6 +2,7 @@
 
 Authors: Kris Leech, robwilliams
 
+* Remove deprecated #commit method (breaking change)
 * Update to Wisper 2.0 (non-breaking, but we will released a major anyway)
 * fixed README example
 * document fixes 

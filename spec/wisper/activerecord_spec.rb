@@ -9,48 +9,6 @@ describe 'ActiveRecord' do
     expect(Wisper.model).to eq Wisper::ActiveRecord::Publisher
   end
 
-  describe '.commit' do # DEPRECATED
-    describe 'when creating' do
-      context 'and model is valid' do
-        it 'publishes create_<model_name>_successful event to listener' do
-          expect(listener).to receive(:create_meeting_successful).with(instance_of(model_class))
-          model_class.subscribe(listener)
-          model_class.commit
-        end
-      end
-
-      context 'and model is not valid' do
-        it 'publishes create_<model_name>_failed event to listener' do
-          expect(listener).to receive(:create_meeting_failed).with(instance_of(model_class))
-          model_class.subscribe(listener)
-          model_class.commit(title: nil)
-        end
-      end
-    end
-
-    describe 'when updating' do
-      before { model_class.create! }
-
-      let(:model) { model_class.first }
-
-      context 'and model is valid' do
-        it 'publishes update_<model_name>_successful event to listener' do
-          expect(listener).to receive(:update_meeting_successful).with(instance_of(model_class))
-          model_class.subscribe(listener)
-          model.commit(title: 'foo')
-        end
-      end
-
-      context 'and model is not valid' do
-        it 'publishes update_<model_name>_failed event to listener' do
-          expect(listener).to receive(:update_meeting_failed).with(instance_of(model_class))
-          model_class.subscribe(listener)
-          model.commit(title: nil)
-        end
-      end
-    end
-  end
-
   describe 'create' do
     it 'publishes an after_create event to listener' do
       expect(listener).to receive(:after_create).with(instance_of(model_class))
