@@ -60,15 +60,34 @@ Please refer to the [Wisper README](https://github.com/krisleech/wisper) for ful
 
 The events which are automatically broadcast are:
 
+* `before_validation`
+* `before_<model_name>_validated`
+* `before_create`
+* `before_<model_name>_created`
+* `before_update`
+* `before_<model_name>_updated`
+* `before_destroy`
+* `before_<model_name>_destroyed`
+* `before_save`
+* `before_<model_name>_saved`
+* `after_validation`
+* `validate_<model_name>_failed`
+* `after_<model_name>_validated`
 * `after_create`
-* `after_update`
-* `after_destroy`
 * `create_<model_name>_{successful, failed}`
+* `after_<model_name>_created`
+* `after_update`
 * `update_<model_name>_{successful, failed}`
-* `destroy_<model_name>_successful`
-* `<model_name>_committed`
+* `after_<model_name>_updated`
+* `after_destroy`
+* `after_<model_name>_destroyed`
+* `after_save`
+* `after_<model_name>_saved`
 * `after_commit`
+* `after_<model_name>_committed`
 * `after_rollback`
+* `after_<model_name>_rolled_back`
+
 
 ### Reacting to Events
 

@@ -16,3 +16,4 @@ test/tmp
 test/version_tmp
 tmp
 spec/db.sqlite3
+.idea

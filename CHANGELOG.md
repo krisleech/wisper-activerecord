@@ -1,6 +1,11 @@
 ## unreleased
 
-## 1.0.0 (19/May/2017)
+## 1.1.0 (12 Jun 2018)
+
+* Added and updated active record callback broadcasts. See README.md for full list
+* Added `after_<model_name>_committed` to keep consistency with other broadcasts
+
+## 1.0.0 (19 May 2017)
 
 Authors: Kris Leech, robwilliams
 
