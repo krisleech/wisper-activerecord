@@ -10,7 +10,8 @@ gem 'rspec'
 gem 'pry'
 
 gem "sqlite3",                          :platform => :ruby
-gem "activerecord-jdbcsqlite3-adapter", :platform => :jruby
+# gem "activerecord-jdbcsqlite3-adapter", :platform => :jruby
+gem "activerecord-sqlite3-adapter", :plaform => :jruby
 
 group :metrics do
   gem 'flay'
