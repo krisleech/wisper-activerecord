@@ -11,7 +11,7 @@ require 'active_record'
 
 puts "Using ActiveRecord #{ActiveRecord::VERSION::STRING}"
 
-adapter = RUBY_PLATFORM == "java" ? 'jdbcsqlite3' : 'sqlite3'
+adapter = RUBY_PLATFORM == "java" ? 'sqlite3' : 'sqlite3'
 
 ActiveRecord::Base.establish_connection(:adapter => adapter,
                                         :database => File.dirname(__FILE__) + "/db.sqlite3")
