@@ -25,21 +25,25 @@ module Wisper
 
       def after_create_broadcast
         broadcast(:after_create, self)
+        return unless broadcast_model_name_key
         broadcast("create_#{broadcast_model_name_key}_successful", self)
       end
 
       def after_update_broadcast
         broadcast(:after_update, self)
+        return unless broadcast_model_name_key
         broadcast("update_#{broadcast_model_name_key}_successful", self)
       end
 
       def after_destroy_broadcast
         broadcast(:after_destroy, self)
+        return unless broadcast_model_name_key
         broadcast("destroy_#{broadcast_model_name_key}_successful", self)
       end
 
       def after_commit_broadcast
         broadcast(:after_commit, self)
+        return unless broadcast_model_name_key
         broadcast("#{broadcast_model_name_key}_committed", self)
       end
 
@@ -48,7 +52,7 @@ module Wisper
       end
 
       def broadcast_model_name_key
-        self.class.model_name.param_key
+        self.class.model_name.param_key rescue false
       end
     end
   end
